@@ -1,0 +1,113 @@
+﻿@model MediCareConnect.Models.Patient
+
+@{
+    ViewData["Title"] = "Edit Patient";
+}
+
+<h1>Edit Patient</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PhoneNumber" class="control-label"></label>
+        <input asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <!-- Doctor Selection for Appointments -->
+    <div class="form-group">
+        <label for="selectedDoctors" class="control-label">Select Doctors for Appointments</label>
+        <select name="selectedDoctors" class="form-control" asp-items="ViewBag.Doctors" multiple="multiple">
+            @foreach (var appointment in Model.Appointments)
+            {
+                <option value="@appointment.DoctorId" selected="selected">@appointment.Doctor?.Name</option>
+            }
+        </select>
+    </div>
+
+    <!-- Appointment Dates -->
+    <div class="form-group">
+        <label for="appointmentDates" class="control-label">Appointment Dates</label>
+        @foreach (var appointment in Model.Appointments)
+        {
+            <input type="date" name="appointmentDates" class="form-control" value="@appointment.AppointmentDate.ToString("yyyy-MM-dd")" />
+        }
+    </div>
+
+    <!-- Medication Selection for Prescriptions -->
+    <div class="form-group">
+        <label for="selectedMedications" class="control-label">Select Medications</label>
+        <select name="selectedMedications" class="form-control" asp-items="ViewBag.Medications" multiple="multiple">
+            @foreach (var prescription in Model.Prescriptions)
+            {
+                <option value="@prescription.MedicationId" selected="selected">@prescription.Medication?.Name</option>
+            }
+        </select>
+    </div>
+
+    <!-- Prescription Instructions -->
+    <div class="form-group">
+        <label for="prescriptionInstructions" class="control-label">Prescription Instructions</label>
+        @foreach (var prescription in Model.Prescriptions)
+        {
+            <input type="text" name="prescriptionInstructions" class="form-control" value="@prescription.Instructions" />
+        }
+    </div>
+
+    <!-- Prescription Start Date -->
+    <div class="form-group">
+        <label for="prescriptionStartDates" class="control-label">Prescription Start Date</label>
+        @foreach (var prescription in Model.Prescriptions)
+        {
+            <input type="date" name="prescriptionStartDates" class="form-control" value="@prescription.PrescriptionDate.ToString("yyyy-MM-dd")" />
+        }
+    </div>
+
+    <!-- Prescription End Date -->
+    <div class="form-group">
+        <label for="prescriptionEndDates" class="control-label">Prescription End Date</label>
+        @foreach (var prescription in Model.Prescriptions)
+        {
+            <input type="date" name="prescriptionEndDates" class="form-control" value="@prescription.EndDate?.ToString("yyyy-MM-dd")" />
+        }
+    </div>
+
+    <!-- Diagnosis Selection -->
+    <div class="form-group">
+        <label for="selectedDiagnoses" class="control-label">Select Diagnoses</label>
+        <select name="selectedDiagnoses" class="form-control" asp-items="ViewBag.Diagnoses" multiple="multiple">
+            @foreach (var diagnosis in Model.Diagnoses)
+            {
+                <option value="@diagnosis.Id" selected="selected">@diagnosis.Condition</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

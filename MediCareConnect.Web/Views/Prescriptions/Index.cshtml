@@ -1,0 +1,44 @@
+﻿@model IEnumerable<MediCareConnect.Models.Prescription>
+
+@{
+    ViewData["Title"] = "Prescriptions";
+}
+
+<h1>Prescriptions</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Patient</th>
+            <th>Doctor</th>
+            <th>Medication</th>
+            <th>Diagnosis</th>
+            <th>Prescription Date</th>
+            <th>End Date</th>
+            <th>Instructions</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Patient.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Doctor.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Medication.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Diagnosis.Condition)</td>
+                <td>@Html.DisplayFor(modelItem => item.PrescriptionDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.Instructions)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

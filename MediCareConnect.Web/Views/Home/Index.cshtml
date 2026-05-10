@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to MediCareConnect</h1>
+    <p class="lead">Manage your healthcare appointments efficiently.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Patients</h5>
+                <p class="card-text">View and manage patients.</p>
+                <a href="@Url.Action("Index", "Patients")" class="btn btn-primary">Go to Patients</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Doctors</h5>
+                <p class="card-text">View and manage doctors.</p>
+                <a href="@Url.Action("Index", "Doctors")" class="btn btn-primary">Go to Doctors</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Appointments</h5>
+                <p class="card-text">View and manage appointments.</p>
+                <a href="@Url.Action("Index", "Appointments")" class="btn btn-primary">Go to Appointments</a>
+            </div>
+        </div>
+    </div>
+</div>
